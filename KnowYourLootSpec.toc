@@ -1,0 +1,11 @@
+## Interface: 50300
+## Version: @project-version@
+## Author: Xemnosyst
+## Title: Know Your Loot Spec
+## Notes: View and change your loot specialization at all times.
+## URL: http://www.curse.com/addons/wow/know-your-loot-spec
+## OptionalDeps: BittensUtils
+libs\LibStub\LibStub.lua
+libs\CallbackHandler\CallbackHandler-1.0.xml
+src\Core.lua
+src\DataBroker.lua
