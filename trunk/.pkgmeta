@@ -1,0 +1,21 @@
+ignore:
+    - .buildpath
+    - .docmeta
+    - .pkgmeta
+    - .project
+
+manual-changelog:
+    filename: version_history.txt
+    markup-type: creole
+
+package-as: know-your-loot-spec
+
+externals:
+	libs/LibStub:
+		url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+	libs/CallbackHandler:
+		url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+	libs/LibDataBroker: 
+		url: git://git.wowace.com/wow/libdatabroker-1-1/mainline.git
+	libs/LibQTip:
+		url: svn://svn.wowace.com/wow/libqtip-1-0/mainline/trunk
