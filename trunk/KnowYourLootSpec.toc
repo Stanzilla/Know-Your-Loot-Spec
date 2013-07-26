@@ -5,7 +5,10 @@
 ## Notes: View and change your loot specialization at all times.
 ## URL: http://www.curse.com/addons/wow/know-your-loot-spec
 ## OptionalDeps: BittensUtils
+## SavedVariablesPerCharacter: KnowYourLootSpecSettings
 libs\LibStub\LibStub.lua
 libs\CallbackHandler\CallbackHandler-1.0.xml
 src\Core.lua
 src\DataBroker.lua
+src\Overlays.lua
+src\Options.lua

@@ -1,7 +1,5 @@
-local _, a = ...
-
-local g = BittensGlobalTables
-local u = g.GetTable("BittensUtilities")
+local addonName, a = ...
+local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local GetLootSpecialization = GetLootSpecialization
 local GetNumSpecializations = GetNumSpecializations
@@ -65,3 +63,24 @@ end
 function a.SwitchTo(spec)
 	SetLootSpecialization(spec.GlobalId)
 end
+
+local function refresh()
+	local spec = a.GetCurrentSpec()
+	a.RefreshDataBroker(spec)
+	a.RefreshOverlays(spec)
+end
+
+u.RegisterEventHandler(
+	{
+		PLAYER_LOOT_SPEC_UPDATED = refresh,
+		PLAYER_ENTERING_WORLD = function()
+			a.InitializeSettings()
+			refresh()
+		end,
+		PLAYER_SPECIALIZATION_CHANGED = function(unit)
+			if unit == "player" then
+				refresh()
+			end
+		end,
+	},
+	addonName)

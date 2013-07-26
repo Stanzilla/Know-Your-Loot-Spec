@@ -1,3 +1,9 @@
+== Version 0.2.0 beta
+* Added an icon showing your current loot spec next to your unit frame (off by default).
+* Added an options panel, to show/hide the new icon.  Right-click the data broker to open it.
+* Bugfix: Packaging error gave the folder the wrong name in the addons directory.
+* Bugfix: The data broker should show the correct value both when logging in AND reloading now.
+
 == Version 0.1.1 beta
 * Include Bitten's Utils.
 
