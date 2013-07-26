@@ -8,7 +8,7 @@ manual-changelog:
     filename: version_history.txt
     markup-type: creole
 
-package-as: know-your-loot-spec
+package-as: KnowYourLootSpec
 
 externals:
 	libs/BittensUtils:

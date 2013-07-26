@@ -1,10 +1,9 @@
 local addonName, a = ...
-
-local g = BittensGlobalTables
-local u = g.GetTable("BittensUtilities")
+local u = BittensGlobalTables.GetTable("BittensUtilities")
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local qTip = LibStub('LibQTip-1.0')
 
+local InterfaceOptionsFrame_OpenToCategory = InterfaceOptionsFrame_OpenToCategory
 local SELECT_LOOT_SPECIALIZATION = SELECT_LOOT_SPECIALIZATION
 local ipairs = ipairs
 
@@ -43,14 +42,6 @@ local function refreshTooltip()
 	end
 end
 
-local function refresh(...)
---print("refresh", ...)
-	local spec = a.GetCurrentSpec()
-	broker.text = spec.Name
-	broker.icon = spec.Icon
-	refreshTooltip()
-end
-
 function broker.OnEnter(anchor)
 	tooltip = qTip:Acquire(addonName, 3, "CENTER", "CENTER", "LEFT")
 	tooltip:SetAutoHideDelay(.25, anchor)	
@@ -63,14 +54,15 @@ function broker.OnLeave()
 	-- QTip will auto-hide
 end
 
-u.RegisterEventHandler(
-	{
-		PLAYER_ALIVE = refresh,
-		PLAYER_LOOT_SPEC_UPDATED = refresh,
-		PLAYER_SPECIALIZATION_CHANGED = function(unit)
-			if unit == "player" then
-				refresh()
-			end
-		end,
-	},
-	addonName)
+function broker:OnClick(button)
+--print("OnClick", button)
+	if button == "RightButton" then
+		InterfaceOptionsFrame_OpenToCategory(a.GetOptionsPanel())
+	end
+end
+
+function a.RefreshDataBroker(spec)
+	broker.text = spec.Name
+	broker.icon = spec.Icon
+	refreshTooltip()
+end
