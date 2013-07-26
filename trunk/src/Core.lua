@@ -9,6 +9,7 @@ local GetSpecialization = GetSpecialization
 local GetSpecializationInfo = GetSpecializationInfo
 local GetSpecializationInfoByID = GetSpecializationInfoByID
 local LOOT_SPECIALIZATION_DEFAULT = LOOT_SPECIALIZATION_DEFAULT
+local SetLootSpecialization = SetLootSpecialization
 local select = select
 
 -- {
@@ -59,4 +60,8 @@ function a.GetAllSpecs()
 		populateSpec(globalId, u.GetOrMakeTable(all, i + 1))
 	end
 	return all
+end
+
+function a.SwitchTo(spec)
+	SetLootSpecialization(spec.GlobalId)
 end
