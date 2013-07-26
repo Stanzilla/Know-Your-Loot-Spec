@@ -1,2 +1,5 @@
+== Version 0.1.1 beta
+* Include Bitten's Utils.
+
 == Version 0.1.0 beta
 * Initial release.
