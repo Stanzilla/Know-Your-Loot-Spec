@@ -68,6 +68,7 @@ local function refresh()
 	local spec = a.GetCurrentSpec()
 	a.RefreshDataBroker(spec)
 	a.RefreshOverlays(spec)
+	a.RefreshTooltip()
 end
 
 u.RegisterEventHandler(

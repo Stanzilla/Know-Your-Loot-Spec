@@ -8,7 +8,11 @@
 ## SavedVariablesPerCharacter: KnowYourLootSpecSettings
 libs\LibStub\LibStub.lua
 libs\CallbackHandler\CallbackHandler-1.0.xml
+libs\LibDataBroker\LibDataBroker-1.1.lua
+libs\LibQTip\lib.xml
+libs\BittensUtils\BittensUtils.xml
 src\Core.lua
+src\Tooltip.lua
 src\DataBroker.lua
 src\Overlays.lua
 src\Options.lua
