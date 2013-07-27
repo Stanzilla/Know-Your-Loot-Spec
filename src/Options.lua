@@ -25,6 +25,14 @@ function a.InitializeSettings()
 	panel.Initialize("KnowYourLootSpecSettings")
 end
 
-function a.GetOptionsPanel()
-	return panel
+function a.ToggleOptions()
+	if not InterfaceOptionsFrame:IsVisible() then
+		InterfaceOptionsFrame_Show()
+		InterfaceOptionsFrame_OpenToCategory(panel)
+	elseif panel:IsVisible() then
+		panel.cancel()
+		InterfaceOptionsFrame:Hide()
+	else
+		InterfaceOptionsFrame_OpenToCategory(panel)
+	end
 end

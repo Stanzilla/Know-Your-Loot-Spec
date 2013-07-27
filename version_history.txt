@@ -1,3 +1,8 @@
+== Version 0.3.0 beta
+* Added a large icon next to the bonus roll window.
+* Added tooltips and click actions to the all 3 icons.
+* Bugfix: Properly reference all included libraries.
+
 == Version 0.2.0 beta
 * Added an icon showing your current loot spec next to your unit frame (off by default).
 * Added an options panel, to show/hide the new icon.  Right-click the data broker to open it.
