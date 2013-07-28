@@ -64,6 +64,20 @@ function a.SwitchTo(spec)
 	SetLootSpecialization(spec.GlobalId)
 end
 
+function a.CreateAction(name, func)
+	return { Name = name, Function = func }
+end
+
+a.ToggleJournalAction = a.CreateAction(
+	BINDING_NAME_TOGGLEENCOUNTERJOURNAL, ToggleEncounterJournal)
+
+------------------------------------------------------------------------ events
+local function initialize()
+	a.InitializeOverlays()
+	a.InitializeDataBroker()
+	a.InitializeSettings()
+end
+
 local function refresh()
 	local spec = a.GetCurrentSpec()
 	a.RefreshDataBroker(spec)
@@ -73,15 +87,9 @@ end
 
 u.RegisterEventHandler(
 	{
+		MY_ADDON_LOADED = initialize,
+		PLAYER_ENTERING_WORLD = refresh,
 		PLAYER_LOOT_SPEC_UPDATED = refresh,
-		PLAYER_ENTERING_WORLD = function()
-			a.InitializeSettings()
-			refresh()
-		end,
-		PLAYER_SPECIALIZATION_CHANGED = function(unit)
-			if unit == "player" then
-				refresh()
-			end
-		end,
+		MY_SPECIALIZATION_CHANGED = refresh,
 	},
 	addonName)

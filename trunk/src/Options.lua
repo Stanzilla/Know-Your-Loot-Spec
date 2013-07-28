@@ -5,12 +5,6 @@ local pairs = pairs
 
 local addonTitle = select(2, GetAddOnInfo(addonName))
 local panel = u.CreateOptionsPanel(addonTitle, nil, nil)
-local y = -16
-for _, overlay in pairs(a.GetOverlays()) do
-	panel.AddCheckBox(overlay, "TOPLEFT", 16, y)
-	y = y - 22
-end
-
 function panel.apply()
 	for name, overlay in pairs(a.GetOverlays()) do
 		if panel.IsCheckBoxSelected(overlay) then
@@ -22,6 +16,11 @@ function panel.apply()
 end
 
 function a.InitializeSettings()
+	local y = -16
+	for _, overlay in pairs(a.GetOverlays()) do
+		panel.AddCheckBox(overlay, "TOPLEFT", 16, y)
+		y = y - 22
+	end
 	panel.Initialize("KnowYourLootSpecSettings")
 end
 
@@ -36,3 +35,5 @@ function a.ToggleOptions()
 		InterfaceOptionsFrame_OpenToCategory(panel)
 	end
 end
+
+a.ToggleOptionsAction = { Name = "Toggle Options", Function = a.ToggleOptions }

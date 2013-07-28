@@ -1,3 +1,8 @@
+== Version 1.0.0
+* Taking out of beta.
+* Added hints for click actions.
+* No longer packaged with LibDataBroker; instead it will not try to use it if you don't already have the library.
+
 == Version 0.3.0 beta
 * Added a large icon next to the bonus roll window.
 * Added tooltips and click actions to the all 3 icons.
