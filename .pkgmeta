@@ -15,9 +15,5 @@ externals:
 		url: svn://svn.curseforge.net/wow/bittens-utils/mainline/trunk
 	libs/LibStub:
 		url: svn://svn.wowace.com/wow/libstub/mainline/trunk
-	libs/CallbackHandler:
-		url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
-	libs/LibDataBroker: 
-		url: git://git.wowace.com/wow/libdatabroker-1-1/mainline.git
 	libs/LibQTip:
 		url: svn://svn.wowace.com/wow/libqtip-1-0/mainline/trunk

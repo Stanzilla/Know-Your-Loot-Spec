@@ -6,14 +6,32 @@ local pairs = pairs
 local overlays = { }
 
 local function createOverlay(
-	name, size, defaultVisibility, parent, anchor1, anchor2, xOffset, yOffset)
+	name, size, defaultVisibility, 
+	mouseoverFunction, leftClickAction, rightClickAction, 
+	parent, anchor1, anchor2, xOffset, yOffset)
 	
 	local frame = CreateFrame("Frame", nil, parent)
 	frame:SetFrameStrata("HIGH")
 	frame:SetSize(size, size)
 	frame:SetPoint(anchor1, parent, anchor2, xOffset, yOffset)
+	if mouseoverFunction then
+		frame:SetScript("OnEnter", function()
+			mouseoverFunction(frame, leftClickAction, rightClickAction)
+		end)
+	end
+	if leftClickAction or rightClickAction then
+		frame:SetScript("OnMouseDown", function(_, button)
+			if button == "LeftButton" then
+				u.Call(u.GetFromTable(leftClickAction, "Function"), frame)
+			elseif button == "RightButton" then
+				u.Call(u.GetFromTable(rightClickAction, "Function"), frame)
+			end
+		end)
+	end
+	
 	local icon = frame:CreateTexture()
 	icon:SetAllPoints(frame)
+	
 	local overlay = {
 		Name = name,
 		Text = "Show on " .. name,
@@ -25,28 +43,22 @@ local function createOverlay(
 	return overlay 
 end
 
-local overlay = createOverlay(
-	"Unit Frame", 20, true, 
-	PlayerFrame, "LEFT", "LEFT", PlayerFrame:GetWidth() / 8, 7)
-overlay.Frame:SetScript("OnMouseDown", function(self, button)
-	if button == "LeftButton" then
-		a.ToggleTooltip(self)
-	elseif button == "RightButton" then
-		a.ToggleOptions()
-	end
-end)
+function a.InitializeOverlays()
+	local hideTooltip = a.CreateAction("Toggle This Menu", a.HideTooltip)
+	local showTooltip = a.CreateAction(
+		"Toggle Tooltip", function(anchor)
+			a.ToggleTooltip(anchor, hideTooltip, a.ToggleOptionsAction)
+		end)
+	createOverlay(
+		"Unit Frame", 20, true, 
+		nil, showTooltip, a.ToggleOptionsAction,
+		PlayerFrame, "LEFT", "LEFT", PlayerFrame:GetWidth() / 8, 7)
 	
-overlay = createOverlay(
-	"Bonus Roll Frame", BonusRollFrame:GetHeight(), true, 
-	BonusRollFrame, "LEFT", "RIGHT")
-overlay.Frame:SetScript("OnEnter", a.ShowTooltip)
-overlay.Frame:SetScript("OnMouseDown", function(self, button)
-	if button == "LeftButton" then
-		ToggleEncounterJournal()
-	elseif button == "RightButton" then
-		a.ToggleOptions()
-	end
-end)
+	createOverlay(
+		"Bonus Roll Window", BonusRollFrame:GetHeight(), true, 
+		a.ToggleTooltip, a.ToggleJournalAction, a.ToggleOptionsAction,
+		BonusRollFrame, "LEFT", "RIGHT")
+end
 
 function a.RefreshOverlays(spec)
 	for _, overlay in pairs(overlays) do
