@@ -1,3 +1,6 @@
+== Version 1.1.0
+* Added announcements when logging in, entering an instance, and targeting a boss.  All can be turned off in the option.
+
 == Version 1.0.0
 * Taking out of beta.
 * Added hints for click actions.

@@ -91,5 +91,20 @@ u.RegisterEventHandler(
 		PLAYER_ENTERING_WORLD = refresh,
 		PLAYER_LOOT_SPEC_UPDATED = refresh,
 		MY_SPECIALIZATION_CHANGED = refresh,
+		PLAYER_LOGIN = function()
+			a.AnnounceOnLogin()
+		end,
+		ZONE_CHANGED_NEW_AREA = function()
+			a.AnnounceOnZoneChange()
+		end,
+		PLAYER_TARGET_CHANGED = function()
+			a.AnnounceOnTargetChange()
+		end,
+		PLAYER_REGEN_DISABLED = function()
+			a.PauseAnnouncements()
+		end,
+		PLAYER_REGEN_ENABLED = function()
+			a.UnpauseAnnouncements()
+		end,
 	},
 	addonName)

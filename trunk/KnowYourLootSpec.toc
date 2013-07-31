@@ -13,4 +13,5 @@ src\Core.lua
 src\Tooltip.lua
 src\DataBroker.lua
 src\Overlays.lua
+src\Announcements.lua
 src\Options.lua
