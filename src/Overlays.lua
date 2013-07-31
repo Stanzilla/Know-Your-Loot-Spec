@@ -1,9 +1,9 @@
 local addonName, a = ...
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 
-local pairs = pairs
+local tinsert = tinsert
 
-local overlays = { }
+a.Overlays = { }
 
 local function createOverlay(
 	name, size, defaultVisibility, 
@@ -32,15 +32,13 @@ local function createOverlay(
 	local icon = frame:CreateTexture()
 	icon:SetAllPoints(frame)
 	
-	local overlay = {
+	tinsert(a.Overlays, {
 		Name = name,
-		Text = "Show on " .. name,
+		Text = name,
 		Frame = frame,
 		Icon = icon,
 		Default = defaultVisibility,
-	}
-	overlays[name] = overlay
-	return overlay 
+	})
 end
 
 function a.InitializeOverlays()
@@ -61,11 +59,7 @@ function a.InitializeOverlays()
 end
 
 function a.RefreshOverlays(spec)
-	for _, overlay in pairs(overlays) do
+	for overlay in u.Values(a.Overlays) do
 		overlay.Icon:SetTexture(spec.Icon)
 	end
-end
-
-function a.GetOverlays()
-	return overlays
 end
