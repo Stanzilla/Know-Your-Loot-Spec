@@ -37,7 +37,7 @@ local function announce()
 	end
 	
 	local now = GetTime()
-	if now - lastAnnounce < 60 then
+	if now - lastAnnounce < 30 then
 		return
 	end
 	

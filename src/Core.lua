@@ -92,10 +92,10 @@ u.RegisterEventHandler(
 		PLAYER_LOOT_SPEC_UPDATED = refresh,
 		MY_SPECIALIZATION_CHANGED = refresh,
 		PLAYER_LOGIN = function()
-			a.AnnounceOnLogin()
+			u.Schedule(15, a.AnnounceOnLogin)
 		end,
 		ZONE_CHANGED_NEW_AREA = function()
-			a.AnnounceOnZoneChange()
+			u.Schedule(15, a.AnnounceOnZoneChange)
 		end,
 		PLAYER_TARGET_CHANGED = function()
 			a.AnnounceOnTargetChange()

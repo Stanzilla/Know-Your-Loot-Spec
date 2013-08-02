@@ -1,3 +1,7 @@
+== Version 1.1.1
+* Announcements are now allowed every 30 seconds, down from 1 minute.
+* Announcements after logging in or entering an instance are delayed 15 seconds, in hopes that your loading screen will have finished by then.
+
 == Version 1.1.0
 * Added announcements when logging in, entering an instance, and targeting a boss.  All can be turned off in the option.
 
