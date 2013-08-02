@@ -8,12 +8,12 @@ a.Overlays = { }
 local function createOverlay(
 	name, size, defaultVisibility, 
 	mouseoverFunction, leftClickAction, rightClickAction, 
-	parent, anchor1, anchor2, xOffset, yOffset)
+	parent, overlayAnchor, parentAnchor, xOffset, yOffset)
 	
 	local frame = CreateFrame("Frame", nil, parent)
 	frame:SetFrameStrata("HIGH")
 	frame:SetSize(size, size)
-	frame:SetPoint(anchor1, parent, anchor2, xOffset, yOffset)
+	frame:SetPoint(overlayAnchor, parent, parentAnchor, xOffset, yOffset)
 	if mouseoverFunction then
 		frame:SetScript("OnEnter", function()
 			mouseoverFunction(frame, leftClickAction, rightClickAction)
@@ -50,7 +50,7 @@ function a.InitializeOverlays()
 	createOverlay(
 		"Unit Frame", 20, true, 
 		nil, showTooltip, a.ToggleOptionsAction,
-		PlayerFrame, "LEFT", "LEFT", PlayerFrame:GetWidth() / 8, 7)
+		PlayerFrame, "CENTER", "LEFT", PlayerFrame:GetWidth() / 6, 7)
 	
 	createOverlay(
 		"Bonus Roll Window", BonusRollFrame:GetHeight(), true, 
