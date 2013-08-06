@@ -1,4 +1,5 @@
 local addonName, a = ...
+local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local GetTime = GetTime
 local GetInstanceInfo = GetInstanceInfo
@@ -16,7 +17,7 @@ local paused = UnitAffectingCombat("player")
 local announcedThisPause = false
 
 local function createOption(name, text, table)
-	local option = { Name = name, Text = text, Default = true }
+	local option = u.CreateCheckBoxOption(name, text, true)
 	tinsert(table, option)
 	return option
 end
@@ -37,7 +38,7 @@ local function announce()
 	end
 	
 	local now = GetTime()
-	if now - lastAnnounce < 30 then
+	if now - lastAnnounce < 60 then
 		return
 	end
 	
