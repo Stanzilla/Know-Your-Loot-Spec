@@ -4,24 +4,15 @@ local u = BittensGlobalTables.GetTable("BittensUtilities")
 local pairs = pairs
 
 local addonTitle = select(2, GetAddOnInfo(addonName))
-local panel = u.CreateOptionsPanel(addonTitle, nil, nil)
+local panel = u.CreateOptionsPanel(addonTitle)
 function panel.apply()
 	for name, overlay in pairs(a.Overlays) do
-		if panel.IsCheckBoxSelected(overlay) then
+		if panel.GetValue(overlay) then
 			overlay.Frame:Show()
 		else
 			overlay.Frame:Hide()
 		end
 	end
-end
-
-local y = -16
-local function addCheckBox(definition, name, text, default)
-	if not definition then
-		definition = { Name = name, Text = text, Default = default}
-	end
-	panel.AddCheckBox(definition, "TOPLEFT", 16, y)
-	y = y - 25
 end
 
 function a.InitializeSettings()
@@ -33,19 +24,11 @@ function a.InitializeSettings()
 end
 
 function a.ToggleOptions()
-	if not InterfaceOptionsFrame:IsVisible() then
-		InterfaceOptionsFrame_Show()
-		InterfaceOptionsFrame_OpenToCategory(panel)
-	elseif panel:IsVisible() then
-		panel.cancel()
-		InterfaceOptionsFrame:Hide()
-	else
-		InterfaceOptionsFrame_OpenToCategory(panel)
-	end
+	u.ToggleOptionsPanel(panel)
 end
 
 function a.IsOptionSelected(option)
-	return panel.IsCheckBoxSelected(option)
+	return panel.GetValue(option)
 end
 
 a.ToggleOptionsAction = { Name = "Toggle Options", Function = a.ToggleOptions }

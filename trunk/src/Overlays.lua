@@ -32,13 +32,10 @@ local function createOverlay(
 	local icon = frame:CreateTexture()
 	icon:SetAllPoints(frame)
 	
-	tinsert(a.Overlays, {
-		Name = name,
-		Text = name,
-		Frame = frame,
-		Icon = icon,
-		Default = defaultVisibility,
-	})
+	local definition = u.CreateCheckBoxOption(name, name, defaultVisibility)
+	definition.Frame = frame
+	definition.Icon = icon
+	tinsert(a.Overlays, definition)
 end
 
 function a.InitializeOverlays()
