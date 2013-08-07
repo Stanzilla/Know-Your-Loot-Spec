@@ -1,3 +1,6 @@
+== Version 1.1.3
+* Update for a change in the latest version of Bitten's Utils.
+
 == Version 1.1.2
 * Bugfix for a Lua error.
 * Bumped the minimum time between announcements back up to 1 minute.
@@ -12,7 +15,7 @@
 == Version 1.0.0
 * Taking out of beta.
 * Added hints for click actions.
-* No longer packaged with LibDataBroker; instead it will not try to use it if you don't already have the library.
+* No longer packaged with LibDataBroker; instead it will only try to use it if you already have the library.
 
 == Version 0.3.0 beta
 * Added a large icon next to the bonus roll window.
