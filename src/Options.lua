@@ -17,9 +17,9 @@ end
 
 function a.InitializeSettings()
 	local x, y = 16, -16
-	y = panel.AddCheckBoxGroup("Show Icon On:", a.Overlays, x, y)
-	y = panel.AddCheckBoxGroup("Announce When:", a.AnnounceOptions, x, y - 10)
-	y = panel.AddCheckBoxGroup("Announce To:", a.AnnounceTargets, x, y - 10)
+	y = panel.AddGroup("Show Icon On:", a.Overlays, x, y)
+	y = panel.AddGroup("Announce When:", a.AnnounceOptions, x, y - 10)
+	y = panel.AddGroup("Announce To:", a.AnnounceTargets, x, y - 10)
 	panel.Initialize("KnowYourLootSpecSettings")
 end
 
