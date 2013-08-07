@@ -1,4 +1,5 @@
 local addonName, a = ...
+local L = a.Localize
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local GetTime = GetTime
@@ -15,35 +16,38 @@ a.AnnounceTargets = { }
 local lastAnnounce = 0
 local paused = UnitAffectingCombat("player")
 local announcedThisPause = false
+local ANNOUNCE_THROTTLE = 5
 
-local function createOption(name, text, table)
-	local option = u.CreateCheckBoxOption(name, text, true)
+local function createOption(name, text, default, table)
+	local option = u.CreateCheckBoxOption(name, text, default)
 	tinsert(table, option)
 	return option
 end
 
-local function createAnnounceOption(name, text)
-	return createOption(name, text, a.AnnounceOptions)
+local function createAnnounceOption(name, text, default)
+	return createOption(name, text, default, a.AnnounceOptions)
 end
 
 local function createAnnounceTarget(name, text)
-	return createOption(name, text, a.AnnounceTargets)
+	return createOption(name, text, true, a.AnnounceTargets)
 end
 
-local chatOption = createAnnounceTarget("AnnounceToChat", "General Chat Log")
-local warningOption = createAnnounceTarget("AnnounceToWarning", "Warning Text")
+local warningOption = createAnnounceTarget(
+	"AnnounceToWarning", L["Warning Text"])
+local chatOption = createAnnounceTarget(
+	"AnnounceToChat", L["General Chat Log"])
 local function announce()
 	if paused and announcedThisPause then
 		return
 	end
 	
 	local now = GetTime()
-	if now - lastAnnounce < 60 then
+	if now - lastAnnounce < ANNOUNCE_THROTTLE then
 		return
 	end
 	
 	local text = 
-		"|cffffc800Know your loot spec: |r" .. a.GetCurrentSpec().LongName
+		"|cffffc800Know your loot spec:|r " .. a.GetCurrentSpec().LongName
 	if a.IsOptionSelected(chatOption) then
 		print(text)
 	end
@@ -56,7 +60,7 @@ end
 
 function a.PauseAnnouncements()
 	paused = true
-	announcedThisPause = GetTime() - lastAnnounce < 60
+	announcedThisPause = GetTime() - lastAnnounce < ANNOUNCE_THROTTLE
 end
 
 function a.UnpauseAnnouncements()
@@ -64,7 +68,7 @@ function a.UnpauseAnnouncements()
 end
 
 ------------------------------------------------------------------------- Login
-local loginOption = createAnnounceOption("AnnounceLogin", "Logging In")
+local loginOption = createAnnounceOption("AnnounceLogin", L["Logging In"], true)
 
 function a.AnnounceOnLogin()
 	if a.IsOptionSelected(loginOption) then
@@ -76,7 +80,7 @@ end
 
 ---------------------------------------------------------------- Enter Instance
 local zoneInOption = createAnnounceOption(
-	"AnnounceZone", "Entering an Instance")
+	"AnnounceZone", L["Entering an Instance"], true)
 
 local announceDifficulties = {
 	[0] = false, -- no instance
@@ -106,10 +110,31 @@ function a.AnnounceOnZoneChange()
 end
 
 ------------------------------------------------------------------- Target Boss
-local targetOption = createAnnounceOption("AnnounceTarget", "Targeting a Boss")
+local targetOption = createAnnounceOption(
+	"AnnounceTarget", L["Targeting a Boss"], true)
 
 function a.AnnounceOnTargetChange()
 	if a.IsOptionSelected(targetOption) and UnitLevel("target") == -1 then
+		announce()
+	end
+end
+
+----------------------------------------------------------------- Changing Spec
+local specOption = createAnnounceOption(
+	"AnnounceSpec", L["Changing Spec"], false)
+
+function a.AnnounceOnSpecChange()
+	if a.IsOptionSelected(specOption) then
+		announce()
+	end
+end
+
+------------------------------------------------------------ Changing Loot Spec
+local lootSpecOption = createAnnounceOption(
+	"AnnounceLootSpec", L["Changing Loot Spec"], false)
+
+function a.AnnounceOnLootSpecChange()
+	if a.IsOptionSelected(lootSpecOption) then
 		announce()
 	end
 end

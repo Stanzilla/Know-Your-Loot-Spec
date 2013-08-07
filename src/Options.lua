@@ -1,4 +1,5 @@
 local addonName, a = ...
+local L = a.Localize
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local pairs = pairs
@@ -17,9 +18,9 @@ end
 
 function a.InitializeSettings()
 	local x, y = 16, -16
-	y = panel.AddGroup("Show Icon On:", a.Overlays, x, y)
-	y = panel.AddGroup("Announce When:", a.AnnounceOptions, x, y - 10)
-	y = panel.AddGroup("Announce To:", a.AnnounceTargets, x, y - 10)
+	y = panel.AddGroup(L["Show Icon On"] .. ":", a.Overlays, x, y)
+	y = panel.AddGroup(L["Announce When"] .. ":", a.AnnounceOptions, x, y - 10)
+	y = panel.AddGroup(L["Announce To"] .. ":", a.AnnounceTargets, x, y - 10)
 	panel.Initialize("KnowYourLootSpecSettings")
 end
 
@@ -31,4 +32,4 @@ function a.IsOptionSelected(option)
 	return panel.GetValue(option)
 end
 
-a.ToggleOptionsAction = { Name = "Toggle Options", Function = a.ToggleOptions }
+a.ToggleOptionsAction = { Name = L["Toggle Options"], Function = a.ToggleOptions }
