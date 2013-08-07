@@ -1,4 +1,5 @@
 local addonName, a = ...
+local L = a.Localize
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local GetLootSpecialization = GetLootSpecialization
@@ -22,7 +23,7 @@ local function populateSpec(globalId, table)
 --print("populateSpec", globalId, table)
 	table.GlobalId = globalId
 	if globalId == 0 then
-		table.Name = "Current"
+		table.Name = L["Current"]
 		local _, name, icon
 		local id = GetSpecialization()
 		if id then
@@ -89,8 +90,17 @@ u.RegisterEventHandler(
 	{
 		MY_ADDON_LOADED = initialize,
 		PLAYER_ENTERING_WORLD = refresh,
-		PLAYER_LOOT_SPEC_UPDATED = refresh,
-		MY_SPECIALIZATION_CHANGED = refresh,
+		PLAYER_LOOT_SPEC_UPDATED = function()
+			a.AnnounceOnLootSpecChange()
+			refresh()
+		end,
+		MY_SPECIALIZATION_CHANGED = function()
+			a.AnnounceOnSpecChange()
+			if a.GetCurrentSpec().GlobalId == 0 then
+				a.AnnounceOnLootSpecChange()
+			end
+			refresh()
+		end,
 		PLAYER_LOGIN = function()
 			u.Schedule(15, a.AnnounceOnLogin)
 		end,

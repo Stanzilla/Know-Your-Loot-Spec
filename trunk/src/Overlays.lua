@@ -1,4 +1,5 @@
 local addonName, a = ...
+local L = a.Localize
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local tinsert = tinsert
@@ -32,16 +33,16 @@ local function createOverlay(
 	local icon = frame:CreateTexture()
 	icon:SetAllPoints(frame)
 	
-	local definition = u.CreateCheckBoxOption(name, name, defaultVisibility)
+	local definition = u.CreateCheckBoxOption(name, L[name], defaultVisibility)
 	definition.Frame = frame
 	definition.Icon = icon
 	tinsert(a.Overlays, definition)
 end
 
 function a.InitializeOverlays()
-	local hideTooltip = a.CreateAction("Toggle This Menu", a.HideTooltip)
+	local hideTooltip = a.CreateAction(L["Toggle This Menu"], a.HideTooltip)
 	local showTooltip = a.CreateAction(
-		"Toggle Tooltip", function(anchor)
+		L["Toggle Tooltip"], function(anchor)
 			a.ToggleTooltip(anchor, hideTooltip, a.ToggleOptionsAction)
 		end)
 	createOverlay(

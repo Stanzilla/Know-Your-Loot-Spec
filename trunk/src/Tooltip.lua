@@ -1,4 +1,5 @@
 local addonName, a = ...
+local L = a.Localize
 local u = BittensGlobalTables.GetTable("BittensUtilities")
 local qTip = LibStub('LibQTip-1.0')
 
@@ -9,14 +10,9 @@ local ipairs = ipairs
 local tooltip
 local leftClick
 local rightClick
-local hintFormat = "|cffd200ff%s Click: %s|r"
 local radioFormat = "|TInterface\\Buttons\\UI-RadioButton:0:0:0:0:64:16:%s:%s:%s:%s|t"
 local radioOutline = radioFormat:format(1, 14, 1, 14)
 local radioFill = radioFormat:format(19, 28, 3, 12)
-
-local function clickHandler(_, spec)
-	a.SwitchTo(spec)
-end
 
 local function tooltipIsShowing()
 	return qTip:IsAcquired(addonName) and tooltip:IsVisible()
@@ -41,7 +37,7 @@ end
 local function addActionLine(label, action)
 	if action then
 		local row = tooltip:AddLine()
-		tooltip:SetCell(row, 1, label, nil, nil, 3)
+		tooltip:SetCell(row, 1, label .. ":", nil, nil, 3)
 		tooltip:SetCell(row, 4, action.Name)
 		tooltip:SetCellTextColor(
 			row, 1, 
@@ -68,12 +64,14 @@ function a.RefreshTooltip()
 		tooltip:SetCell(row, 1, spec.Current and radioFill or radioOutline)
 		tooltip:SetCell(row, 2, "|T" .. spec.Icon .. ":16|t")
 		tooltip:SetCell(row, 3, spec.LongName, nil, nil, 2)
-		tooltip:SetLineScript(row, "OnMouseDown", clickHandler, spec)
+		tooltip:SetLineScript(row, "OnMouseDown", function()
+			a.SwitchTo(spec)
+		end)
 	end
 	if leftClick or rightClick then
 		tooltip:AddSeparator()
-		addActionLine("Left Click:", leftClick)
-		addActionLine("Right Click:", rightClick)
+		addActionLine(L["Left Click"], leftClick)
+		addActionLine(L["Right Click"], rightClick)
 	end
 end
 
