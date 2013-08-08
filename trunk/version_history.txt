@@ -1,3 +1,6 @@
+== Version 1.2.1
+* German localization.  Thanks ckaotik!
+
 == Version 1.2.0
 * Added options to announce when changing spec and loot spec, both off by default.
 * Added support for localization into other languages.  Visit http://wow.curseforge.com/addons/know-your-loot-spec/localization/ to contribute a translation.
