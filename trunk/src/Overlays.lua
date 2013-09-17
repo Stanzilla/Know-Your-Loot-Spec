@@ -12,7 +12,9 @@ local function createOverlay(
 	parent, overlayAnchor, parentAnchor, xOffset, yOffset)
 	
 	local frame = CreateFrame("Frame", nil, parent)
-	frame:SetFrameStrata("HIGH")
+	frame:SetFrameStrata("MEDIUM")
+--	frame:SetFrameStrata("LOW")
+--	frame:SetFrameLevel(4)
 	frame:SetSize(size, size)
 	frame:SetPoint(overlayAnchor, parent, parentAnchor, xOffset, yOffset)
 	if mouseoverFunction then

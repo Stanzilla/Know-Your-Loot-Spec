@@ -89,7 +89,10 @@ end
 u.RegisterEventHandler(
 	{
 		MY_ADDON_LOADED = initialize,
-		PLAYER_ENTERING_WORLD = refresh,
+		PLAYER_ENTERING_WORLD = function()
+			a.ScanInventory()
+			refresh()
+		end,
 		PLAYER_LOOT_SPEC_UPDATED = function()
 			a.AnnounceOnLootSpecChange()
 			refresh()
@@ -115,6 +118,11 @@ u.RegisterEventHandler(
 		end,
 		PLAYER_REGEN_ENABLED = function()
 			a.UnpauseAnnouncements()
+		end,
+		UNIT_INVENTORY_CHANGED = function(unit)
+			if UnitIsUnit(unit, "player") then
+				a.ScanInventoryForAnnounce()
+			end
 		end,
 	},
 	addonName)
