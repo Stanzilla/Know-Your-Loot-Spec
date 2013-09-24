@@ -47,11 +47,11 @@ function a.InitializeOverlays()
 		L["Toggle Tooltip"], function(anchor)
 			a.ToggleTooltip(anchor, hideTooltip, a.ToggleOptionsAction)
 		end)
+		
 	createOverlay(
-		"Unit Frame", 20, true, 
+		"Unit Frame", 17, true, 
 		nil, showTooltip, a.ToggleOptionsAction,
-		PlayerFrame, "CENTER", "LEFT", PlayerFrame:GetWidth() / 6, 7)
-	
+		PlayerFrame, "RIGHT", "RIGHT", -10, 18)
 	createOverlay(
 		"Bonus Roll Window", BonusRollFrame:GetHeight(), true, 
 		a.ToggleTooltip, a.ToggleJournalAction, a.ToggleOptionsAction,
