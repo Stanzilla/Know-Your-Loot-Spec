@@ -1,3 +1,6 @@
+== Version 60000.1.0
+* Making the "Out of date" message go away.
+
 == Version 50400.1.1
 * Moved the icon on your Unit Frame so it no longer interferes with the PvP indicator.
 
