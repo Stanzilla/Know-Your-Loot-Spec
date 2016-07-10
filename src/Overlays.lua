@@ -4,13 +4,15 @@ local u = BittensGlobalTables.GetTable("BittensUtilities")
 
 local tinsert = tinsert
 
+-- GLOBALS: PlayerFrame BonusRollFrame
+
 a.Overlays = { }
 
 local function createOverlay(
-	name, size, defaultVisibility, 
-	mouseoverFunction, leftClickAction, rightClickAction, 
+	name, size, defaultVisibility,
+	mouseoverFunction, leftClickAction, rightClickAction,
 	parent, overlayAnchor, parentAnchor, xOffset, yOffset)
-	
+
 	local frame = CreateFrame("Frame", nil, parent)
 	frame:SetFrameStrata("MEDIUM")
 --	frame:SetFrameStrata("LOW")
@@ -31,10 +33,10 @@ local function createOverlay(
 			end
 		end)
 	end
-	
+
 	local icon = frame:CreateTexture()
 	icon:SetAllPoints(frame)
-	
+
 	local definition = u.CreateCheckBoxOption(name, L[name], defaultVisibility)
 	definition.Frame = frame
 	definition.Icon = icon
@@ -47,13 +49,13 @@ function a.InitializeOverlays()
 		L["Toggle Tooltip"], function(anchor)
 			a.ToggleTooltip(anchor, hideTooltip, a.ToggleOptionsAction)
 		end)
-		
+
 	createOverlay(
-		"Unit Frame", 17, true, 
+		"Unit Frame", 17, true,
 		nil, showTooltip, a.ToggleOptionsAction,
 		PlayerFrame, "RIGHT", "RIGHT", -10, 18)
 	createOverlay(
-		"Bonus Roll Window", BonusRollFrame:GetHeight(), true, 
+		"Bonus Roll Window", BonusRollFrame:GetHeight(), true,
 		a.ToggleTooltip, a.ToggleJournalAction, a.ToggleOptionsAction,
 		BonusRollFrame, "LEFT", "RIGHT")
 end

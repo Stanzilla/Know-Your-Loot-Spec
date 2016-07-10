@@ -22,15 +22,15 @@ function a.ShowTooltip(anchor, leftAction, rightAction)
 	if tooltipIsShowing() then
 		return
 	end
-	
+
 	tooltip = qTip:Acquire(addonName, 4)
-	tooltip:SetAutoHideDelay(.2, anchor)	
+	tooltip:SetAutoHideDelay(.2, anchor)
 	tooltip:SmartAnchorTo(anchor)
-	
+
 	leftClick = leftAction
 	rightClick = rightAction
 	a.RefreshTooltip()
-	
+
 	tooltip:Show()
 end
 
@@ -40,10 +40,10 @@ local function addActionLine(label, action)
 		tooltip:SetCell(row, 1, label .. ":", nil, nil, 3)
 		tooltip:SetCell(row, 4, action.Name)
 		tooltip:SetCellTextColor(
-			row, 1, 
+			row, 1,
 			NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 		tooltip:SetCellTextColor(
-			row, 4, 
+			row, 4,
 			NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 		tooltip:SetCellScript(row, 4, "OnMouseDown", action.Function)
 	end
@@ -53,11 +53,11 @@ function a.RefreshTooltip()
 	if not qTip:IsAcquired(addonName) then
 		return
 	end
-	
+
 	tooltip:Clear()
 	local row = tooltip:AddLine()
 	tooltip:SetCell(
-		row, 1, SELECT_LOOT_SPECIALIZATION, 
+		row, 1, SELECT_LOOT_SPECIALIZATION,
 		tooltip:GetHeaderFont(), "CENTER", 4)
 	for _, spec in ipairs(a.GetAllSpecs()) do
 		row = tooltip:AddLine()
