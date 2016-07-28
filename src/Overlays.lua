@@ -51,11 +51,11 @@ function a.InitializeOverlays()
 		end)
 
 	createOverlay(
-		"Unit Frame", 17, true,
+		"Unit Frame", 17, false,
 		nil, showTooltip, a.ToggleOptionsAction,
 		PlayerFrame, "RIGHT", "RIGHT", -10, 18)
 	createOverlay(
-		"Bonus Roll Window", BonusRollFrame:GetHeight(), true,
+		"Bonus Roll Window", BonusRollFrame:GetHeight(), false,
 		a.ToggleTooltip, a.ToggleJournalAction, a.ToggleOptionsAction,
 		BonusRollFrame, "LEFT", "RIGHT")
 end
