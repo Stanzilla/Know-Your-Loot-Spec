@@ -145,7 +145,7 @@ end
 local inventory = { }
 
 local function addInterestingItems(optionName, optionText, ...)
-	createAnnounceOption(optionName, optionText, true)
+	createAnnounceOption(optionName, optionText, false)
 	local items = { }
 	for i = 1, select("#", ...) do
 		items[select(i, ...)] = 0
