@@ -82,7 +82,7 @@ end
 
 ---------------------------------------------------------------- Enter Instance
 local zoneInOption = createAnnounceOption(
-	"AnnounceZone", L["Entering an Instance"], true)
+	"AnnounceZone", L["Entering an Instance"], false)
 
 local announceDifficulties = {
 	[0] = false, -- no instance
@@ -143,27 +143,6 @@ end
 
 --------------------------------------------------------------------- Inventory
 local inventory = { }
-
-local function addInterestingItems(optionName, optionText, ...)
-	createAnnounceOption(optionName, optionText, false)
-	local items = { }
-	for i = 1, select("#", ...) do
-		items[select(i, ...)] = 0
-	end
-	inventory[optionName] = items
-end
-
-addInterestingItems(
-	"AnnounceHeroicCache",
-	L["Receiving a Heroic Cache of Treasures"],
-	98134, -- Heroic Cache of Treasures
-	98546) -- Bulging Heroic Cache of Treasures
-addInterestingItems(
-	"AnnounceOtherCache",
-	L["Receiving Other Caches of Treasures"],
-	89613, -- Cache of Treasures
-	98133, -- Greater Cache of Treasures
-	92813) -- Greater Cache of Treasures
 
 function a.ScanInventory()
 	local announcable = false
