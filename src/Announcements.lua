@@ -18,7 +18,7 @@ a.AnnounceTargets = { }
 local lastAnnounce = 0
 local paused = UnitAffectingCombat("player")
 local announcedThisPause = false
-local ANNOUNCE_THROTTLE = 5
+local ANNOUNCE_THROTTLE = 25
 
 local function createOption(name, text, default, table)
 	local option = u.CreateCheckBoxOption(name, text, default)
@@ -116,8 +116,10 @@ local targetOption = createAnnounceOption(
 	"AnnounceTarget", L["Targeting a Boss"], true)
 
 function a.AnnounceOnTargetChange()
-	if a.IsOptionSelected(targetOption) and UnitLevel("target") == -1 then
+	local bossName = " "
+	if a.IsOptionSelected(targetOption) and UnitLevel("target") == -1 and UnitName("target") ~= bossName then
 		announce()
+		bossName = UnitName("target")
 	end
 end
 
