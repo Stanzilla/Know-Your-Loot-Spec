@@ -1,11 +1,12 @@
-## Interface: 70100
+## Interface: 70200
 ## Version: @project-version@
 ## Author: Xemnosyst
-## Title: Know Your Loot Spec
+## Title: Know Your Loot Spec vStan
 ## Notes: Be aware of your loot specialization at all times, and easily change it.
 ## X-Website: http://www.curse.com/addons/wow/know-your-loot-spec
 ## OptionalDeps: BittensUtils
 ## SavedVariables: KnowYourLootSpecSettings
+
 libs\LibStub\LibStub.lua
 libs\LibQTip\lib.xml
 libs\BittensUtils\BittensUtils.xml
